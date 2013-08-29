@@ -24,7 +24,7 @@ See the [companion project](https://github.com/cassiel/reveal-js-demo-slides) fo
 
 ## Setup
 
-Apache needs to be configuted to allow SSI. This is my personal configuration (in `/etc/apache2/users/nick`) under OS X:
+Apache needs to be configured to allow SSI. This is my personal configuration (in `/etc/apache2/users/nick`) under OS X:
 
         <Directory "/Users/nick/Sites/">
         	Options Includes Indexes Multiviews
