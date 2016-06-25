@@ -34,6 +34,10 @@ Apache needs to be configured to allow SSI. This is my personal configuration (i
         	Order allow,deny
         	Allow from all
         </Directory>
+        
+To get Apache running on newer OS X releases, follow the first few instructions of this:
+
+        https://coolestguidesontheplanet.com/get-apache-mysql-php-and-phpmyadmin-working-on-osx-10-11-el-capitan/
 
 With this, and with the `reveal.js` repo. checked out into `~/Sites`, I can access my presentation at:
 
