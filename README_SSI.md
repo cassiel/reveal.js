@@ -24,11 +24,11 @@ See the [companion project](https://github.com/cassiel/reveal-js-demo-slides) fo
 
 ## Setup
 
-We need a web server configured to allow SSI. In [reveal-js-demo-slides](https://github.com/cassiel/reveal-js-demo-slides) look at `server.sh`: it uses Docker to start up a web server. Run that in the top-level directory of our `reveal.js`. Then hit up `http://localhost:5050` for the reveal.js demo, or `http://localhost:5050/index-ssi.html` for the SSI page with (hopefully) generated content.
+We need a web server configured to allow SSI. In [reveal-js-demo-slides](https://github.com/cassiel/reveal-js-demo-slides) look at `server.sh`: it uses Docker to start up a web server. Run that in the top-level directory of our `reveal.js`. Then hit up `http://localhost:5050` for the reveal.js demo, or `http://localhost:5050/index-ssi.shtml` for the SSI page with (hopefully) generated content.
 
 ## Update
 
-It seems we got fed up with relying on SSI, so more recent versions of the Clojure renderer just process `index-ssi.html` as a template and insert the content directly, copying over static dependencies.
+It seems we got fed up with relying on SSI, so more recent versions of the Clojure renderer just process `index-ssi.shtml` as a template and insert the content directly, copying over static dependencies.
 
 ## Author
 
