@@ -47,6 +47,9 @@
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
+                  // NICK: don't print incremental fragments in PDF.
+                  // (TODO: should probably be templated somehow with a clj->js.)
+                  Reveal.configure({pdfSeparateFragments: false});
 		</script>
 	</body>
 </html>
