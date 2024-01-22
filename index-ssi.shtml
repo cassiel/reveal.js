@@ -18,6 +18,15 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+                <!-- NICK: rather than get into themes, some simple lightweight CSS: -->
+                <style>
+                  span.colour-emph {
+                    color: #EBB734;
+                    font-weight: bold;
+                  }
+                </style>
+
 	</head>
 	<body>
             <!--
