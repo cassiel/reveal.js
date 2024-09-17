@@ -28,7 +28,7 @@ import {
 } from './utils/constants.js'
 
 // The reveal.js version
-export const VERSION = '5.0.1';
+export const VERSION = '5.1.0';
 
 /**
  * reveal.js
@@ -50,6 +50,9 @@ export default function( revealElement, options ) {
 
 	// Configuration defaults, can be overridden at initialization time
 	let config = {},
+
+		// Flags if initialize() has been invoked for this reveal instance
+		initialized = false,
 
 		// Flags if reveal.js is loaded (has dispatched the 'ready' event)
 		ready = false,
@@ -127,6 +130,8 @@ export default function( revealElement, options ) {
 
 		if( !revealElement ) throw 'Unable to find presentation root (<div class="reveal">).';
 
+		initialized = true;
+
 		// Cache references to key DOM elements
 		dom.wrapper = revealElement;
 		dom.slides = revealElement.querySelector( '.slides' );
@@ -184,6 +189,9 @@ export default function( revealElement, options ) {
 	 * to the current URL deeplink if there is one.
 	 */
 	function start() {
+
+		// Don't proceed if this instance has been destroyed
+		if( initialized === false ) return;
 
 		ready = true;
 
@@ -603,6 +611,12 @@ export default function( revealElement, options ) {
 	 * DOM and removing all event listeners.
 	 */
 	function destroy() {
+
+		initialized = false;
+
+		// There's nothing to destroy if this instance hasn't finished
+		// initializing
+		if( ready === false ) return;
 
 		removeEventListeners();
 		cancelAutoSlide();
@@ -1243,7 +1257,7 @@ export default function( revealElement, options ) {
 
 	/**
 	 * Returns true if we're currently on the last slide in
-	 * the presenation. If the last slide is a stack, we only
+	 * the presentation. If the last slide is a stack, we only
 	 * consider this the last slide if it's at the end of the
 	 * stack.
 	 */
@@ -1445,6 +1459,9 @@ export default function( revealElement, options ) {
 		// within it
 		let currentHorizontalSlide = horizontalSlides[ indexh ],
 			currentVerticalSlides = currentHorizontalSlide.querySelectorAll( 'section' );
+
+		// Indicate when we're on a vertical slide
+		revealElement.classList.toggle( 'is-vertical-slide', currentVerticalSlides.length > 1 );
 
 		// Store references to the previous and current slides
 		currentSlide = currentVerticalSlides[ indexv ] || currentHorizontalSlide;
@@ -2595,6 +2612,9 @@ export default function( revealElement, options ) {
 					let h = indexh - 1;
 					slide( h, v );
 				}
+				else if( config.rtl ) {
+					navigateRight({skipFragments});
+				}
 				else {
 					navigateLeft({skipFragments});
 				}
@@ -2920,7 +2940,7 @@ export default function( revealElement, options ) {
 		loadSlide: slideContent.load.bind( slideContent ),
 		unloadSlide: slideContent.unload.bind( slideContent ),
 
-		// Media playback
+		// Start/stop all media inside of the current slide
 		startEmbeddedContent: () => slideContent.startEmbeddedContent( currentSlide ),
 		stopEmbeddedContent: () => slideContent.stopEmbeddedContent( currentSlide, { unloadIframes: false } ),
 
